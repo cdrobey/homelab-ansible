@@ -25,4 +25,4 @@ BSD
 Author Information
 ------------------
 
-The home lab support my ongoing develop. mailto:cdr67@yahoo.com or @cdrobey
+The home lab support my ongoing develop. cdr67@yahoo.com or @cdrobey
