@@ -1,0 +1,16 @@
+---
+  - name: Update the distro
+    apt: upgrade=yes update_cache=yes cache_valid_time=3600
+    tags: ['apt']
+
+
+  - name: Install packages
+    apt: pkg={{ item }} state=installed
+    with_items:
+      - "{{ common_packages }}"
+    tags: ['apt']
+
+  - name: Install VIM as default text editor
+    alternatives: name=editor path=/usr/bin/vim.basic
+    when: "'vim' in common_packages"
+    tags: ['apt']

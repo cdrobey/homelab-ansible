@@ -1,0 +1,6 @@
+---
+  - name: Set {{ common_hostname }} hostname
+    hostname: name={{ common_hostname }}
+    when: common_hostname is defined
+    tags: ['hostname']
+

@@ -1,0 +1,20 @@
+---
+  - name: Create {{ common_deployer_group}} group
+    group: name={{ common_deployer_group }}
+    tags: ['deployer']
+
+  - name: Create {{ common_deployer_user }} user
+    user: name={{ common_deployer_user }}
+          group={{ common_deployer_group }}
+          home={{ common_deployer_home }}
+          shell={{ common_deployer_shell }}
+    tags: ['deployer']
+
+  - name: Add {{ common_deployer_user }} in sudoers.d
+    template: src=etc/sudoers.d/sudoer dest=/etc/sudoers.d/{{ common_deployer_user }} mode=0440
+    tags: ['deployer']
+
+  - name: Setup {{ common_deployer_user }}  authorized_keys
+    authorized_key: user={{ common_deployer_user }} key="{{ common_deployer_public_key }}"
+    when: common_deployer_public_key is defined
+    tags: ['deployer']

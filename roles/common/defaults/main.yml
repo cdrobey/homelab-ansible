@@ -1,0 +1,17 @@
+---
+# defaults file for common
+common_packages:
+  - fail2ban
+  - vim
+  - sudo
+
+common_hostname: labtest01
+
+common_timezone: America/Denver
+
+common_deployer_manage: True
+common_deployer_user: "ubuntu"
+common_deployer_group: "ubuntu"
+common_deployer_home: "/home/{{ common_deployer_user }}"
+common_deployer_shell: "/bin/bash"
+common_deployer_public_key: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC7YrtR3tfvCNWZ83k8JGdJxzha0esIKaszA/prM6asxbVRg/g4WpRFjIDRTIPcycynQ3teDjAeRXsz/Ri8bgfWQEMsAFS+M0PEQV14+qxUGeaB8AU/JodmZ1cjCEN961MAInvQnbUHYEEDDEkRo0CEG5ea4ztPvDCIBV3qW5MZbkHUuAF1s8Tpr7pO4OXkkngZEcAgUscemaQMGr/qR0fJECDnliRuGH3vFoJnZeh3ElTUM71eb3IQeMkaivQ+F1kUOZCufu59pCJbDPYF/Sk1sejv8QnUfs8f3CvuqElZ0uFjuWMgbNWRojcj1LB/TFK5M3M+94HAhzUJp/tkHDM9 chris@familyroberosn.com
