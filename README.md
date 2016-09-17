@@ -1,31 +1,21 @@
-Role Name
-=========
+Homelab VMware/Ubuntu Nested VM Testlab
+=======================================
 
-A brief description of the role goes here.
+This repository hosts the ansible playbooks that setup a nested ESX server for test use.  I use it for developing my skills.
 
 Requirements
 ------------
 
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
+The scripts require a large ESX server with the capacity to support a series of nested servers.
 
-Role Variables
---------------
+Roles
+-----
 
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
+The site.yml ansible playbook references a series of roles to support the deployment of the ESX and Ubuntu 16.04 templates.  The playbooks include the following:
 
-Dependencies
-------------
-
-A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
-
-Example Playbook
-----------------
-
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
-
-    - hosts: servers
-      roles:
-         - { role: username.rolename, x: 42 }
+* Common - Builds a common set of services on Ubuntu
+* VMware - Builds the entire VMware stack including networking, data stores, and esx hosts
+* TBD
 
 License
 -------
@@ -35,4 +25,4 @@ BSD
 Author Information
 ------------------
 
-An optional section for the role authors to include contact information, or a website (HTML is not allowed).
+The home lab support my ongoing develop. mailto:cdr67@yahoo.com or @cdrobey
