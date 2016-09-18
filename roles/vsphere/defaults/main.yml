@@ -1,0 +1,6 @@
+---
+# defaults file for vsphere
+
+vsphere_vc: vc.fr.lan
+vsphere_vcadmin: administrator@vsphere.local
+vsphere_vcpass: Andy&C1ay

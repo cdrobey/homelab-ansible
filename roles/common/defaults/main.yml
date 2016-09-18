@@ -4,6 +4,8 @@ common_packages:
   - fail2ban
   - vim
   - sudo
+  - python
+  - python-pip
 
 common_hostname: labtest01
 

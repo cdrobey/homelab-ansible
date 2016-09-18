@@ -1,7 +1,7 @@
 ---
-- hosts: servers
+- hosts: all
   remote_user: ubuntu
   become: yes
   become_method: sudo
   roles:
-    - role: common
+    - role: vsphere

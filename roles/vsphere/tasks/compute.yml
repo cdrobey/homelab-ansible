@@ -1,0 +1,14 @@
+---
+# tasks file for vsphere
+- vsphere_guest:
+    vcenter_hostname: "{{ vsphere_vc }}"
+    username: "{{ vsphere_vcadmin }}"
+    password: "{{ vsphere_vcpass }}"
+    validate_certs: false
+    guest: LAB-ESX
+    from_template: yes
+    template_src: UBUNTU1604-ANSIBLE
+    cluster: Lab
+    esxi:
+      datacenter: Centennial
+      hostname: vsphere.fr.lan

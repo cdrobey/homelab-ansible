@@ -1,0 +1,3 @@
+---
+# tasks file for vsphere
+  - include: compute.yml
