@@ -1,6 +1,6 @@
 ---
 # tasks file for vsphere
-- name: Deploy ESX Guests from Templates
+- name: Remove ESX Servers
   vsphere_guest:
     vcenter_hostname: "{{ vsphere_vc }}"
     username: "{{ vsphere_vcadmin }}"
