@@ -4,3 +4,22 @@
 vsphere_vc: vc.fr.lan
 vsphere_vcadmin: administrator@vsphere.local
 vsphere_vcpass: Andy&C1ay
+
+vsphere_esx_template: VSPHERE6.0U2
+vsphere_cluster: LAB
+vsphere_dc: Centennial
+vsphere_host: r610.fr.lan
+vsphere_ram: 8192
+vsphere_vcpu: 4
+vsphere_esxlist:
+  - LAB-ESX01
+  - LAB-ESX02
+vsphere_nic_han: vS0HAN
+vsphere_nic_lan: vS0LAN
+vsphere_nic_mgt: vS0MGT
+vsphere_esxiadmin: root
+vsphere_esxipass: cdr08558256
+vsphere_esxhost:
+  - labesx01.fr.lan
+  - labesx02.fr.lan
+
