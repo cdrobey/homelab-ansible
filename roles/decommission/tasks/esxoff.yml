@@ -1,0 +1,17 @@
+---
+# tasks file for decomm
+- name: Power-Off ESX Guests
+  vsphere_guest:
+    vcenter_hostname: "{{ decomm_vc }}"
+    username: "{{ decomm_vcadmin }}"
+    password: "{{ decomm_vcpass }}"
+    validate_certs: false
+    cluster: "{{ decomm_cluster }}"
+    guest: "{{ item }}"
+    state: powered_off
+    esxi:
+      datacenter: "{{ decomm_dc }}"
+      hostname: "{{ decomm_host }}"
+  with_items: "{{ decomm_esxlist }}"
+  tags: ['off']
+

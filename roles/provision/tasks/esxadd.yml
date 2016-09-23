@@ -1,0 +1,69 @@
+---
+# tasks file for prov
+- name: Deploy ESX Guests from Templates
+  vsphere_guest:
+    vcenter_hostname: "{{ prov_vc }}"
+    username: "{{ prov_vcadmin }}"
+    password: "{{ prov_vcpass }}"
+    validate_certs: false
+    power_on_after_clone: false
+    vm_extra_config:
+      folder: Test
+    guest: "{{ item }}"
+    from_template: yes
+    template_src: "{{ prov_esx_template }}"
+    cluster: "{{ prov_cluster }}"
+    esxi:
+      datacenter: "{{ prov_dc }}"
+      hostname: "{{ prov_host }}"
+  with_items: "{{ prov_esxlist }}"
+  tags: ['clone']
+
+
+
+- name: Update Memory and Network for  ESX Guests
+  vsphere_guest:
+    vcenter_hostname: "{{ prov_vc }}"
+    username: "{{ prov_vcadmin }}"
+    password: "{{ prov_vcpass }}"
+    validate_certs: false
+    cluster: "{{ prov_cluster }}"
+    guest: "{{ item }}"
+    state: reconfigured
+    vm_hardware:
+      memory_mb: "{{ prov_ram }}"
+      num_cpus: "{{ prov_vcpu }}"
+    esxi:
+      datacenter: "{{ prov_dc }}"
+      hostname: "{{ prov_host }}"
+  with_items: "{{ prov_esxlist }}"
+  tags: ['reconfigure']
+
+- name: Gather Facts for ESX Server
+  vsphere_guest:
+    vcenter_hostname: "{{ prov_vc }}"
+    username: "{{ prov_vcadmin }}"
+    password: "{{ prov_vcpass }}"
+    validate_certs: false
+    guest: "{{ item }}"
+    vmware_guest_facts: yes
+  with_items: "{{ prov_esxlist }}"
+  tags: ['facts']
+
+#- name: Set Hostnames for ESX Servers
+#  local_action:
+#    module: vmware_vm_shell
+#    hostname: "{{ prov_vc }}"
+#    username: "{{ prov_vcadmin }}"
+#    password: "{{ prov_vcpass }}"
+#    validate_certs: False
+#    vm_id: "{{ item }}"
+#    vm_username: root
+#    vm_password: cdr08558256
+#    vm_shell: esxcfg-advcfg
+#    vm_shell_args: " -s {{ item }} /Misc/hostname"
+#    vm_shell_env:
+#      - "PATH=/bin"
+#    vm_shell_cwd: "/tmp"
+#  with_items: "{{ prov_esxlist }}"
+#  tags: ['sethostname']

@@ -1,0 +1,13 @@
+---
+# tasks file for decomm
+- name: Remove ESX Servers
+  vsphere_guest:
+    vcenter_hostname: "{{ decomm_vc }}"
+    username: "{{ decomm_vcadmin }}"
+    password: "{{ decomm_vcpass }}"
+    validate_certs: false
+    guest: "{{ item }}"
+    state: absent
+    force: yes
+  with_items: "{{ decomm_esxlist }}"
+  tags: ['rm']

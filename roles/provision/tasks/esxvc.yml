@@ -1,0 +1,24 @@
+---
+# tasks file for prov
+- name: Create Data Center for Lab
+  local_action: >
+    vmware_datacenter
+    hostname: "{{ prov_vc }}"
+    username: "{{ prov_vcadmin }}"
+    password: "{{ prov_vcpass }}"
+    validate_certs: false
+#    datacenter_name: "{{ prov_dc }}"
+    datacenter_name: "Test"
+    state=present
+  tags: ['DC']
+
+- name: Create Cluster
+      local_action: >
+        vmware_cluster
+        hostname="vc.fr.lan" 
+        username="administrator@vsphere.local"
+        password="Andy&C1ay"
+        validate_certs=false
+        datacenter_name = "Centennial"
+        cluster_name = "Lab"
+       tags: {'Cluster'}

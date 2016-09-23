@@ -1,0 +1,15 @@
+---
+# defaults file for decomm
+
+decomm_vc: vc.fr.lan
+decomm_vcadmin: administrator@vsphere.local
+decomm_vcpass: Andy&C1ay
+
+decomm_esxlist:
+  - LAB-ESX01
+  - LAB-ESX02
+
+decomm_cluster: LAB
+decomm_dc: Centennial
+decomm_host: r610.fr.lan
+

@@ -1,0 +1,24 @@
+---
+# defaults file for prov
+
+prov_vc: vc.fr.lan
+prov_vcadmin: administrator@vsphere.local
+prov_vcpass: Andy&C1ay
+
+prov_esx_template: ESX6.0U2
+prov_cluster: LAB
+prov_dc: Centennial
+prov_host: r610.fr.lan
+prov_ram: 8192
+prov_vcpu: 4
+prov_nic_han: vS0HAN
+prov_nic_lan: vS0LAN
+prov_nic_mgt: vS0MGT
+prov_esxiadmin: root
+prov_esxipass: cdr08558256
+prov_esxhost:
+  - labesx01.fr.lan
+  - labesx02.fr.lan
+prov_esxlist:
+  - LAB-ESX01
+  - LAB-ESX02
