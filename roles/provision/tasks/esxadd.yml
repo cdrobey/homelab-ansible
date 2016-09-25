@@ -50,20 +50,20 @@
   with_items: "{{ prov_esxlist }}"
   tags: ['facts']
 
-#- name: Set Hostnames for ESX Servers
-#  local_action:
-#    module: vmware_vm_shell
-#    hostname: "{{ prov_vc }}"
-#    username: "{{ prov_vcadmin }}"
-#    password: "{{ prov_vcpass }}"
-#    validate_certs: False
-#    vm_id: "{{ item }}"
-#    vm_username: root
-#    vm_password: cdr08558256
-#    vm_shell: esxcfg-advcfg
-#    vm_shell_args: " -s {{ item }} /Misc/hostname"
-#    vm_shell_env:
-#      - "PATH=/bin"
-#    vm_shell_cwd: "/tmp"
-#  with_items: "{{ prov_esxlist }}"
-#  tags: ['sethostname']
+- name: Set Hostnames for ESX Servers
+  local_action:
+    module: vmware_vm_shell
+    hostname: "{{ prov_vc }}"
+    username: "{{ prov_vcadmin }}"
+    password: "{{ prov_vcpass }}"
+    validate_certs: False
+    vm_id: "{{ item }}"
+    vm_username: root
+    vm_password: cdr08558256
+    vm_shell: esxcfg-advcfg
+    vm_shell_args: " -s {{ item }} /Misc/hostname"
+    vm_shell_env:
+      - "PATH=/bin"
+    vm_shell_cwd: "/tmp"
+  with_items: "{{ prov_esxlist }}"
+  tags: ['sethostname']
