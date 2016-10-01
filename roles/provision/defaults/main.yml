@@ -8,6 +8,7 @@ prov_vcpass: Andy&C1ay
 prov_esx_template: ESX6.0U2
 prov_cluster: LAB
 prov_dc: Centennial
+prov_folder: Test
 prov_host: r610.fr.lan
 prov_ram: 8192
 prov_vcpu: 4

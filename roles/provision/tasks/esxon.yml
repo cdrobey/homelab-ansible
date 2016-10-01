@@ -15,3 +15,35 @@
   with_items: "{{ prov_esxlist }}"
   tags: ['on']
 
+# tasks file for prov
+- name: Power-On ESX Guests
+  vsphere_guest:
+    vcenter_hostname: "{{ prov_vc }}"
+    username: "{{ prov_vcadmin }}"
+    password: "{{ prov_vcpass }}"
+    validate_certs: false
+    cluster: "{{ prov_cluster }}"
+    guest: "{{ item }}"
+    state: powered_off
+    esxi:
+      datacenter: "{{ prov_dc }}"
+      hostname: "{{ prov_host }}"
+  with_items: "{{ prov_esxlist }}"
+  tags: ['off']
+
+# tasks file for prov
+- name: Power-On ESX Guests
+  vsphere_guest:
+    vcenter_hostname: "{{ prov_vc }}"
+    username: "{{ prov_vcadmin }}"
+    password: "{{ prov_vcpass }}"
+    validate_certs: false
+    cluster: "{{ prov_cluster }}"
+    guest: "{{ item }}"
+    state: restart
+    esxi:
+      datacenter: "{{ prov_dc }}"
+      hostname: "{{ prov_host }}"
+  with_items: "{{ prov_esxlist }}"
+  tags: ['restart']
+

@@ -19,8 +19,6 @@
   with_items: "{{ prov_esxlist }}"
   tags: ['clone']
 
-
-
 - name: Update Memory and Network for  ESX Guests
   vsphere_guest:
     vcenter_hostname: "{{ prov_vc }}"
@@ -50,6 +48,21 @@
   with_items: "{{ prov_esxlist }}"
   tags: ['facts']
 
+- name: Power-On ESX Guests
+  vsphere_guest:
+    vcenter_hostname: "{{ prov_vc }}"
+    username: "{{ prov_vcadmin }}"
+    password: "{{ prov_vcpass }}"
+    validate_certs: false
+    cluster: "{{ prov_cluster }}"
+    guest: "{{ item }}"
+    state: powered_on
+    esxi:
+      datacenter: "{{ prov_dc }}"
+      hostname: "{{ prov_host }}"
+  with_items: "{{ prov_esxlist }}"
+  tags: ['on']
+
 - name: Set Hostnames for ESX Servers
   local_action:
     module: vmware_vm_shell
@@ -59,11 +72,47 @@
     validate_certs: False
     vm_id: "{{ item }}"
     vm_username: root
-    vm_password: cdr08558256
-    vm_shell: esxcfg-advcfg
-    vm_shell_args: " -s {{ item }} /Misc/hostname"
+    vm_password: ""
+    vm_shell: /bin/esxcli
+    vm_shell_args: " system settings advanced set -o /Misc/PreferredHostName -s {{ item }}"
     vm_shell_env:
       - "PATH=/bin"
     vm_shell_cwd: "/tmp"
   with_items: "{{ prov_esxlist }}"
   tags: ['sethostname']
+
+- name: Set root passwords for ESX Servers
+  local_action:
+    module: vmware_vm_shell
+    hostname: "{{ prov_vc }}"
+    username: "{{ prov_vcadmin }}"
+    password: "{{ prov_vcpass }}"
+    validate_certs: False
+    vm_id: "{{ item }}"
+    vm_username: root
+    vm_password: ""
+    vm_shell: /bin/sh
+    vm_shell_args: "-c \"(echo y8U1p4zeCi2X | /bin/passwd -s root > /tmp/output 2>&1)\""
+    vm_shell_env:
+      - "PATH=/bin"
+    vm_shell_cwd: "/tmp"
+  with_items: "{{ prov_esxlist }}"
+  tags: ['setpasswd']
+
+- name: Restart services to complete network setup for ESX Servers
+  local_action:
+    module: vmware_vm_shell
+    hostname: "{{ prov_vc }}"
+    username: "{{ prov_vcadmin }}"
+    password: "{{ prov_vcpass }}"
+    validate_certs: False
+    vm_id: "{{ item }}"
+    vm_username: root
+    vm_password: ""
+    vm_shell: /sbin/services.sh
+    vm_shell_args: " restart"
+    vm_shell_env:
+      - "PATH=/bin"
+    vm_shell_cwd: "/tmp"
+  with_items: "{{ prov_esxlist }}"
+  tags: ['restartservices']

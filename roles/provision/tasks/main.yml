@@ -1,5 +1,5 @@
 ---
 # tasks file for vsphere
+  - include: esxvc.yml
   - include: esxadd.yml
   - include: esxon.yml
-  - include: esxvc.yml
